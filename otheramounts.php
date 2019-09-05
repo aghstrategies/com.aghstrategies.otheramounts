@@ -62,12 +62,17 @@ function otheramounts_civicrm_buildform($formName, &$form) {
  * Implements hook_civicrm_buildAmount().
  */
 function otheramounts_civicrm_buildAmount($pageType, &$form, &$amount) {
-  if ($pageType == 'membership' && $form->_submitValues) {
-    if ($form->getVar('_id') == 108) {
-      $amount[320]['options'][895]['amount'] = $form->_submitValues['other_amount'];
-    }
-    if ($form->getVar('_id') == 112) {
-      $amount[342]['options'][965]['amount'] = $form->_submitValues['other_amount'];
+  $fieldsToAddOtherAmountOptionFor = otheramounts_getsetting();
+  if (isset($form->_priceSet['fields'])) {
+    foreach ($form->_priceSet['fields'] as $fieldId => $fieldDetails) {
+      if (in_array($fieldId, $fieldsToAddOtherAmountOptionFor) && !empty($form->_submitValues["other_amount_$fieldId"])) {
+        $otherAmounts = TRUE;
+        foreach ($fieldDetails['options'] as $optionId => $values) {
+          if ($values['label'] == 'Other Amount') {
+            $amount[$fieldId]['options'][$optionId]['amount'] = $form->_submitValues["other_amount_$fieldId"];
+          }
+        }
+      }
     }
   }
 }
