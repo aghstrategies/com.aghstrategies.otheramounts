@@ -1,44 +1,19 @@
 # com.aghstrategies.otheramounts
 
-![Screenshot](/images/screenshot.png)
+This Extension:
 
-(*FIXME: In one or two paragraphs, describe what the extension does and why one would download it. *)
+Adds A "Allow Other Amounts" checkbox to the bottom of the Edit Price Field Form.
 
-The extension is licensed under [AGPL-3.0](LICENSE.txt).
+IF:
+1. The Price Field has the Input Field Type: "Radio"
+2. The "Allow Other Amounts" checkbox is checked
+3. "Display Amount?" is not checked
+4. There is a price option with the label "Other Amount"
+5. The price field is used for a Contribution Form
+![screenshot of the price field form](images/priceFieldForm.png)
+![screenshot of the price options form](images/OtherAmtsettings.png)
 
-## Requirements
+THEN:  
 
-* PHP v5.6+
-* CiviCRM (*FIXME: Version number*)
-
-## Installation (Web UI)
-
-This extension has not yet been published for installation via the web UI.
-
-## Installation (CLI, Zip)
-
-Sysadmins and developers may download the `.zip` file for this extension and
-install it with the command-line tool [cv](https://github.com/civicrm/cv).
-
-```bash
-cd <extension-dir>
-cv dl com.aghstrategies.otheramounts@https://github.com/FIXME/com.aghstrategies.otheramounts/archive/master.zip
-```
-
-## Installation (CLI, Git)
-
-Sysadmins and developers may clone the [Git](https://en.wikipedia.org/wiki/Git) repo for this extension and
-install it with the command-line tool [cv](https://github.com/civicrm/cv).
-
-```bash
-git clone https://github.com/FIXME/com.aghstrategies.otheramounts.git
-cv en otheramounts
-```
-
-## Usage
-
-(* FIXME: Where would a new user navigate to get started? What changes would they see? *)
-
-## Known Issues
-
-(* FIXME *)
+On that Contribution Form an Other Amount box will appear in place of the Other Amount option like below. When the other amount box is clicked the Other Amount will be used instead of whatever other price had been selected.  
+![screenshot of other amount in action](images/otherAmountField.png)
