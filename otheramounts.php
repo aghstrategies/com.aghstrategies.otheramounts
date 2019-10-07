@@ -50,7 +50,7 @@ function otheramounts_civicrm_buildform($formName, &$form) {
         CRM_Core_Region::instance('form-body')->add(array(
           'template' => "{$templatePath}/contribForm.tpl",
         ));
-        $form->assign('elementNames', $otherAmountFields);
+        $form->assign('otherAmounts', $otherAmountFields);
         CRM_Core_Resources::singleton()->addVars('otheramounts', array('otherFields' => $detsForJs));
         CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.otheramounts', 'js/otherAmount.js');
       }

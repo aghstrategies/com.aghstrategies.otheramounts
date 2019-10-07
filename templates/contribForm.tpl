@@ -1,7 +1,7 @@
-{foreach from=$elementNames item=elementName}
+{foreach from=$otherAmounts item=otherAmount}
   <div class="crm-section otheramount">
-    <div class="label">{$form.$elementName.label}</div>
-    <div class="content">{$form.$elementName.html}</div>
+    <div class="lab">{$form.$otherAmount.label}</div>
+    <div class="content">{$form.$otherAmount.html}</div>
     <div class="clear"></div>
   </div>
 {/foreach}
