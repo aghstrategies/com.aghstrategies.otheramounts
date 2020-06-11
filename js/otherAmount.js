@@ -14,7 +14,7 @@ CRM.$(function ($) {
 
 
     // Hide other amount option just rely on the box
-    $(inputId).parent().hide();
+    // $(inputId).parent().hide();
 
     // Use the other amount option which is hidden
     var useOtherField = function () {
@@ -46,4 +46,5 @@ CRM.$(function ($) {
     $('input[name^=other_amount_' + priceFieldId + ']').keyup(calculateTotalWithOtherAmount);
     $('input[name^=' + priceField + ']').change(calculateTotalWithOtherAmount);
   });
+
 });
