@@ -1,4 +1,9 @@
 CRM.$(function ($) {
+   $('input#group_10273').parent().hide();
+   $('input#group_10163').parent().hide();
+   $('input#group_10166').parent().hide();
+
+   $('label[for="discountcode"]').text("Presenters, enter your discount code here"); 
   var otherFields = CRM.vars.otheramounts.otherFields;
 
   $.each(otherFields, function(priceFieldId, priceOptionId) {
