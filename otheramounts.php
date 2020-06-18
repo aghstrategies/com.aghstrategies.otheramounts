@@ -34,7 +34,7 @@ function otheramounts_civicrm_buildform($formName, &$form) {
           $otherAmounts = TRUE;
           foreach ($fieldDetails['options'] as $key => $values) {
             // TODO: handle this differently than looking for the label
-            if ($values['label'] == 'Pay What You Can (enter amount below--minimum $10)') {
+          if (substr($values['label'], 0, 8) === 'Pay What') {
               $detsForJs[$fieldId] = $key;
             }
           }
@@ -66,7 +66,7 @@ function otheramounts_civicrm_buildAmount($pageType, &$form, &$amount) {
       if (in_array($fieldId, $fieldsToAddOtherAmountOptionFor) && !empty($form->_submitValues["other_amount_$fieldId"])) {
         $otherAmounts = TRUE;
         foreach ($fieldDetails['options'] as $optionId => $values) {
-          if ($values['label'] == 'Pay What You Can (enter amount below--minimum $10)') {
+          if (substr($values['label'], 0, 8) === 'Pay What') {
             $amount[$fieldId]['options'][$optionId]['amount'] = $form->_submitValues["other_amount_$fieldId"];
           }
         }
