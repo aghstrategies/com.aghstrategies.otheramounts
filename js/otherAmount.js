@@ -28,7 +28,7 @@ CRM.$(function ($) {
       $(inputId).trigger('click');
     };
 
-    useOtherField();
+   // useOtherField();
     $($otherBox).keyup(useOtherField);
     $($otherBox).click(useOtherField);
 
