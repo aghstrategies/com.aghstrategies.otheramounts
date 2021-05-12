@@ -27,7 +27,7 @@ function otheramounts_civicrm_validateForm($formName, &$fields, &$files, &$form,
     // If user has selected the other price option ensure they have entered a value greater than 20
     if ($otherPriceOption != NULL && $otherPriceField != NULL) {
       if ($form->_submitValues["price_{$otherPriceField}"] == $otherPriceOption && $form->_submitValues["other_amount_{$otherPriceField}"] < 20) {
-        $errors["other_amount_$otherPriceField"] = ts('Other Amount must be greater than $20.00');
+        $errors["other_amount_$otherPriceField"] = ts('Pay What You Can amount must be greater than $20.00');
       }
     }
   }
