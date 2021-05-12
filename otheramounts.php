@@ -3,6 +3,36 @@
 require_once 'otheramounts.civix.php';
 use CRM_Otheramounts_ExtensionUtil as E;
 
+
+/**
+ * Implements hook_civicrm_validateForm().
+ */
+function otheramounts_civicrm_validateForm($formName, &$fields, &$files, &$form, &$errors) {
+  // IF on a contribution or event registration form
+  if ($formName == 'CRM_Contribute_Form_Contribution_Main' || $formName == 'CRM_Event_Form_Registration_Register') {
+    $otherPriceOption = NULL;
+    $otherPriceField = NULL;
+    foreach ($form->_priceSet['fields'] as $fieldId => $fieldDetails) {
+      // With an other amount option configured
+      if (in_array($fieldId, Civi::settings()->get('otheramount_pricefields'))) {
+        $otherPriceField = $fieldId;
+        foreach ($fieldDetails['options'] as $key => $values) {
+          // TODO: handle this differently than looking for the label
+          if (substr($values['label'], 0, 8) === 'Pay What') {
+            $otherPriceOption = $key;
+          }
+        }
+      }
+    }
+    // If user has selected the other price option ensure they have entered a value greater than 20
+    if ($otherPriceOption != NULL && $otherPriceField != NULL) {
+      if ($form->_submitValues["price_{$otherPriceField}"] == $otherPriceOption && $form->_submitValues["other_amount_{$otherPriceField}"] < 20) {
+        $errors["other_amount_$otherPriceField"] = ts('Other Amount must be greater than $20.00');
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_civicrm_buildform().
  */
@@ -34,7 +64,7 @@ function otheramounts_civicrm_buildform($formName, &$form) {
           $otherAmounts = TRUE;
           foreach ($fieldDetails['options'] as $key => $values) {
             // TODO: handle this differently than looking for the label
-          if (substr($values['label'], 0, 8) === 'Pay What') {
+            if (substr($values['label'], 0, 8) === 'Pay What') {
               $detsForJs[$fieldId] = $key;
             }
           }

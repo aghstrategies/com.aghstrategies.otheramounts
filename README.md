@@ -17,3 +17,5 @@ THEN:
 
 On that Contribution Form an Other Amount box will appear in place of the Other Amount option like below. When the other amount box is clicked the Other Amount will be used instead of whatever other price had been selected.  
 ![screenshot of other amount in action](images/otherAmountField.png)
+
+ALSO adds validation to ensure if the user enters an other amount it is greater than $20.00
