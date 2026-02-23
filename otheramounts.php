@@ -41,8 +41,8 @@ function otheramounts_civicrm_buildform($formName, &$form) {
             }
           }
           $otherAmountFieldName = "other_amount_$fieldId";
-          $form->add('text', $otherAmountFieldName, ts('Other Amount'));
-          $form->addRule($otherAmountFieldName, ts('Please enter a number'), 'numeric');
+          $form->add('text', $otherAmountFieldName, E::ts('Other Amount'), ['placeholder' => 'Other Amount']);
+          $form->addRule($otherAmountFieldName, E::ts('Please enter a number'), 'numeric');
           $otherAmountFields[] = $otherAmountFieldName;
         }
       }
