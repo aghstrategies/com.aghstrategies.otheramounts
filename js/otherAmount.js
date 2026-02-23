@@ -14,11 +14,12 @@ CRM.$(function ($) {
 
 
     // Hide other amount option just rely on the box
-    $(inputId).parent().hide();
+    //$(inputId).parent().hide();
 
     // Use the other amount option which is hidden
     var useOtherField = function () {
-      $(inputId).prop('checked', true);
+      $(inputId).attr('checked', true);
+      $(inputId).attr('checked', true);
       $(inputId).trigger('change');
       $(inputId).trigger('click');
     };
