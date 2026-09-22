@@ -14,7 +14,7 @@ function otheramounts_civicrm_buildform($formName, &$form) {
       $form->add('checkbox', 'otheramount', ts('Allow Other Amounts'));
       CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.otheramounts', 'js/priceFieldSettings.js');
       //set default value
-      $defaults = array('otheramount' => 0);
+      $defaults = ['otheramount' => 0];
       $fieldsToAddOtherAmountOptionFor = otheramounts_getsetting();
       if (in_array($form->getVar('_fid'), $fieldsToAddOtherAmountOptionFor)) {
         $defaults['otheramount'] = 1;
@@ -22,9 +22,9 @@ function otheramounts_civicrm_buildform($formName, &$form) {
       $form->setDefaults($defaults);
       // Assumes templates are in a templates folder relative to this file.
       $templatePath = realpath(dirname(__FILE__) . "/templates");
-      CRM_Core_Region::instance('form-body')->add(array(
+      CRM_Core_Region::instance('form-body')->add([
         'template' => "{$templatePath}/otherAmounts.tpl",
-      ));
+      ]);
     }
 
     // Contribution Form
@@ -47,11 +47,11 @@ function otheramounts_civicrm_buildform($formName, &$form) {
         }
       }
       if (!empty($otherAmountFields)) {
-        CRM_Core_Region::instance('form-body')->add(array(
+        CRM_Core_Region::instance('form-body')->add([
           'template' => "{$templatePath}/contribForm.tpl",
-        ));
+        ]);
         $form->assign('otherAmounts', $otherAmountFields);
-        CRM_Core_Resources::singleton()->addVars('otheramounts', array('otherFields' => $detsForJs));
+        CRM_Core_Resources::singleton()->addVars('otheramounts', ['otherFields' => $detsForJs]);
         CRM_Core_Resources::singleton()->addScriptFile('com.aghstrategies.otheramounts', 'js/otherAmount.js');
       }
     }
@@ -80,16 +80,16 @@ function otheramounts_civicrm_buildAmount($pageType, &$form, &$amount) {
 function otheramounts_getsetting() {
   $fieldsToAddOtherAmountOptionFor = [];
   try {
-    $otherFields = civicrm_api3('Setting', 'get', array(
+    $otherFields = civicrm_api3('Setting', 'get', [
       'return' => "otheramount_pricefields",
-    ));
+    ]);
   }
   catch (CiviCRM_API3_Exception $e) {
     $error = $e->getMessage();
-    CRM_Core_Error::debug_log_message(ts('API Error %1', array(
+    CRM_Core_Error::debug_log_message(ts('API Error %1', [
       'domain' => 'com.aghstrategies.otheramounts',
       1 => $error,
-    )));
+    ]));
   }
   if (!empty($otherFields['values'][1]['otheramount_pricefields'])) {
     $fieldsToAddOtherAmountOptionFor = $otherFields['values'][1]['otheramount_pricefields'];
@@ -119,16 +119,16 @@ function otheramounts_civicrm_postProcess($formName, &$form) {
       }
     }
     try {
-      $result = civicrm_api3('Setting', 'create', array(
+      $result = civicrm_api3('Setting', 'create', [
         'otheramount_pricefields' => $fieldsToAddOtherAmountOptionFor,
-      ));
+      ]);
     }
     catch (CiviCRM_API3_Exception $e) {
       $error = $e->getMessage();
-      CRM_Core_Error::debug_log_message(ts('API Error %1', array(
+      CRM_Core_Error::debug_log_message(ts('API Error %1', [
         'domain' => 'com.aghstrategies.otheramounts',
         1 => $error,
-      )));
+      ]));
     }
   }
 }
